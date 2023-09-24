@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+      </div>
+    {% endif %}
+      <h2 class="text-center my-3">All recipes</h2>
+<div class="container my-3">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sr.no</th>
+            <th scope="col">Recipe name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for recipes in recipe %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{recipes.recipe_name}}</td>
+            <td>{{recipes.recipe_description}}</td>
+            <td>
+              <img src="{{recipes.recipe_image.url}}/" alt="" height="100" width="100">
+              <a href="/delete_recipe/{{recipes.id}}" class="btn btn-danger">Delete</a>
+              <a href="/update_recipe/{{recipes.id}}" class="btn btn-success">Update</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+  {% endblock body %}
